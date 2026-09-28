@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulasi Antrian Bank (3 Teller)</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Simulasi Antrian Bank (3 Teller)</h1>
+        <p class="subtitle">Satuan waktu dalam tabel adalah <strong>menit</strong>. Customer menuju teller yang kosong lebih dulu.</p>
+        
+        <!-- Input satu per satu (animasi per kolom) -->
+        <div class="input-section">
+            <div class="input-group">
+                <label for="iat">IAT:</label>
+                <input type="number" id="iat" min="0" value="0" placeholder="Contoh: 2">
+            </div>
+            <div class="input-group">
+                <label for="waktu-layanan">Waktu Layanan:</label>
+                <input type="number" id="waktu-layanan" min="1" value="5" placeholder="Contoh: 5">
+            </div>
+            <button id="btn-tambah">Tambah Customer</button>
+            <button id="btn-reset" class="btn-danger">Reset Simulasi</button>
+        </div>
+
+        <!-- Input banyak customer sekaligus -->
+        <div class="bulk-section">
+            <div class="speed-row">
+                <label for="kecepatan">Kecepatan pengisian tabel (Isi Otomatis &amp; Input Massal):</label>
+                <select id="kecepatan">
+                    <option value="400">Lambat (400 ms per kolom)</option>
+                    <option value="200" selected>Sedang (200 ms per kolom)</option>
+                    <option value="80">Cepat (80 ms per kolom)</option>
+                    <option value="0">Instan (semua baris sekaligus)</option>
+                </select>
+            </div>
+
+            <div class="panel">
+                <h2>Isi Otomatis (Acak)</h2>
+                <p class="panel-desc">Buat banyak customer sekaligus. IAT dan waktu layanan diacak di dalam rentang yang Anda tentukan, lalu customer masuk ke tabel satu per satu.</p>
+                <div class="panel-fields">
+                    <div class="input-group">
+                        <label for="auto-jumlah">Jumlah customer</label>
+                        <input type="number" id="auto-jumlah" min="1" max="100" value="10">
+                    </div>
+                    <div class="input-group">
+                        <label for="auto-iat-min">IAT (min - maks)</label>
+                        <div class="range-pair">
+                            <input type="number" id="auto-iat-min" min="0" value="1" aria-label="IAT minimum">
+                            <span>-</span>
+                            <input type="number" id="auto-iat-max" min="0" value="5" aria-label="IAT maksimum">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="auto-layanan-min">Layanan (min - maks)</label>
+                        <div class="range-pair">
+                            <input type="number" id="auto-layanan-min" min="1" value="2" aria-label="Waktu layanan minimum">
+                            <span>-</span>
+                            <input type="number" id="auto-layanan-max" min="1" value="8" aria-label="Waktu layanan maksimum">
+                        </div>
+                    </div>
+                </div>
+                <button id="btn-auto" class="btn-success">Isi Otomatis</button>
+            </div>
+
+            <div class="panel">
+                <h2>Input Massal (Manual)</h2>
+                <p class="panel-desc">Satu customer per baris: IAT, lalu Waktu Layanan. Pisahkan dengan koma, spasi, atau tab (bisa tempel langsung dari Excel).</p>
+                <textarea id="bulk-data" rows="6" placeholder="2, 5&#10;3, 4&#10;1, 6"></textarea>
+                <button id="btn-bulk">Tambah Semua</button>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <table id="tabel-simulasi">
+                <thead>
+                    <tr>
+                        <th>Customer Ke-</th>
+                        <th>IAT</th>
+                        <th>Layanan</th>
+                        <th>Kedatangan</th>
+                        <th>Teller</th>
+                        <th>Mulai</th>
+                        <th>Selesai</th>
+                        <th>Antri</th>
+                        <th>Waktu Sistem</th>
+                        <th>Teller Idle</th>
+                        <th>Bebas Teller 1</th>
+                        <th>Bebas Teller 2</th>
+                        <th>Bebas Teller 3</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Baris tabel akan di-generate otomatis oleh JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
